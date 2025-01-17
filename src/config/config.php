@@ -4,6 +4,6 @@ return [
     'consumer_secret' => 'MFn6fuTGnBnz8S9lKjVua9EfqgbKODRczhoAcyx3pqob8kTCA41XPQIRysVO03jA',
     'passkey' => 'bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919',
     'shortcode' => '174379', // Safaricom Test PayBill/Shortcode
-    'callback_url' => 'https://yourdomain.com/api/callback', // Change to your live callback URL
+    'callback_url' => 'https://moneyglowup-mpesa1-backend.vercel.app/api/callback', // Change to your live callback URL
 ];
 ?>
