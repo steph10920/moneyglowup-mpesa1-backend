@@ -1,23 +1,30 @@
 <?php
+// Enable error reporting for debugging
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 
-header('Content-Type: application/json');
-header("Access-Control-Allow-Origin: https://moneyglowup-by-brenda.vercel.app");
-header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type, Authorization");
-header("Access-Control-Allow-Credentials: true");
+// Include Composer's autoloader
+require_once __DIR__ . '/../vendor/autoload.php';
 
-// Handle preflight request
-if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-    http_response_code(200);
-    exit;
+// Define the base directory
+$baseDir = dirname(__DIR__);
+
+// Get the requested URI
+$requestUri = $_SERVER['REQUEST_URI'];
+
+// Handle API routing
+if (strpos($requestUri, '/api/') === 0) {
+    $endpoint = $baseDir . '/src' . $requestUri . '.php';
+    if (file_exists($endpoint)) {
+        require_once $endpoint;
+        exit;
+    } else {
+        http_response_code(404);
+        echo json_encode(['message' => 'Endpoint not found']);
+        exit;
+    }
 }
 
-$requestUri = explode('?', $_SERVER['REQUEST_URI'])[0];
-
-if ($requestUri === '/api/pay') {
-    require_once '../src/api/lipa.php';
-} else {
-    http_response_code(404);
-    echo json_encode(['message' => 'Endpoint not found']);
-}
-?>
+// Default response for invalid routes
+http_response_code(404);
+echo 'Page not found';

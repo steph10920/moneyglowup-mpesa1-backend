@@ -1,6 +1,7 @@
 {
     "name": "moneyglowup/daraja",
-    "description": "A backend for Safaricom Daraja integration",
+    "description": "A backend for M-Pesa integration.",
+    "type": "project",
     "require": {
         "guzzlehttp/guzzle": "^7.5"
     },
